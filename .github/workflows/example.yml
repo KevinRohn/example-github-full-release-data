@@ -32,3 +32,22 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           path: ${{ steps.output_file.outputs.notes }}
+
+  download-release-asset:
+    runs-on: ubuntu-latest
+  
+    steps:
+      # Cleanup workspace path
+      - name: Cleanup workspace path
+        uses: mickem/clean-after-action@v1
+    
+      - name: Download release asset from "${{ github.repository }}"
+        id: release_data
+        uses: KevinRohn/github-full-release-data@support-download-file
+        with: 
+          asset-file: '*.dat'
+          asset-output: './'
+
+      - name: (DEBUG) Show file output
+        run: |
+          ls -lah
