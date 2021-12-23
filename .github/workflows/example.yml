@@ -19,15 +19,24 @@ jobs:
         run: |
           output_file_name="release-note.md"
           touch $output_file_name
+
           echo "::set-output name=notes::$output_file_name"
+      
+      - name: (DEBUG) Show workspace
+        run: |
+          ls -lah
 
       - name: Get "${{ github.repository }}" Release notes
         id: release_data
         uses: KevinRohn/github-full-release-data@main
         with: 
-          body-markdown-file-path: ${{ steps.ouput_file.outputs.notes }}
+          body-markdown-file-path: ${{ steps.output_file.outputs.notes }}
+          
+      - name: (DEBUG) Show workspace
+        run: |
+          ls -lah
 
       - name: Upload downloaded release-note as Workflow artifact
         uses: actions/upload-artifact@v2
         with:
-          path: ${{ steps.ouput_file.outputs.notes }}
+          path: ${{ steps.output_file.outputs.notes }}
