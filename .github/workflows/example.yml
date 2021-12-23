@@ -1,0 +1,33 @@
+name: "Example of full release data"
+
+on:
+  workflow_dispatch:
+
+
+jobs:
+  get-release-notes:
+    runs-on: ubuntu-latest
+    
+    steps:
+
+      # Cleanup workspace path
+      - name: Cleanup workspace path
+        uses: mickem/clean-after-action@v1
+
+      - name: Create markdown output file
+        id: output_file
+        run: |
+          output_file_name="release-note.md"
+          touch $output_file_name
+          echo "::set-output name=name::$output_file_name"
+
+      - name: Get "${{ github.repository }}" Release notes
+        id: release_data
+        uses: KevinRohn/github-full-release-data@main
+        with: 
+          body-markdown-file-path: ${{ steps.ouput_file.outputs.name }}
+
+      - name: Upload downloaded release-note as Workflow artifact
+        uses: actions/upload-artifact@v2
+        with:
+          path: ${{ steps.ouput_file.outputs.name }}
