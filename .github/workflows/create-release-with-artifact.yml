@@ -36,6 +36,6 @@ jobs:
           tag: ${{ github.event.inputs.release-version }}
           token: ${{ secrets.GITHUB_TOKEN }}
           body: example/release-note.md
-          prerelease: true
-          owner: powerIO-GmbH
+          prerelease: false
+          owner: KevinRohn
           artifacts: ${{ steps.sample.outputs.file_name }}
