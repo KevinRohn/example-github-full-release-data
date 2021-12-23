@@ -24,7 +24,7 @@ jobs:
       
       - name: Get "${{ github.repository }}" Release notes
         id: release_data
-        uses: KevinRohn/github-full-release-data@support-download-file
+        uses: KevinRohn/github-full-release-data@documentation
         with: 
           body-markdown-file-path: ${{ steps.output_file.outputs.notes }}
 
@@ -43,7 +43,7 @@ jobs:
     
       - name: Download release asset from "${{ github.repository }}"
         id: release_data
-        uses: KevinRohn/github-full-release-data@support-download-file
+        uses: KevinRohn/github-full-release-data@documentation
         with: 
           asset-file: '*.dat'
           asset-output: './'
