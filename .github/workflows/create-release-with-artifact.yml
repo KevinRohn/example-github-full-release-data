@@ -15,7 +15,7 @@ jobs:
       # Cleanup workspace path
       - name: Cleanup workspace path
         uses: mickem/clean-after-action@v1
-        
+
         # Checkout repository
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -24,7 +24,9 @@ jobs:
         id: sample
         run: 
           file_name="example-output.dat"
-          dd if=/dev/zero of=$file_name  bs=1M  count=24
+          
+          dd if=/dev/zero of=$file_name bs=1M count=24
+
           echo "::set-output name=file_name::$file_name"
 
       # Create release and upload asset file
