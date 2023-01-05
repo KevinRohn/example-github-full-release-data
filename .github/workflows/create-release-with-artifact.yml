@@ -14,11 +14,11 @@ jobs:
     steps:
       # Cleanup workspace path
       - name: Cleanup workspace path
-        uses: mickem/clean-after-action@v1
+        uses: AutoModality/action-clean@v1
 
         # Checkout repository
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Create sample release binary file
         id: sample_binary
