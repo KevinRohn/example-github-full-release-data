@@ -12,11 +12,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Cleanup workspace path
       - name: Cleanup workspace path
         uses: AutoModality/action-clean@v1
 
-        # Checkout repository
       - name: Checkout repository
         uses: actions/checkout@v3
 
