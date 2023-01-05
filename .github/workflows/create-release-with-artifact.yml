@@ -43,7 +43,7 @@ jobs:
 
       # Create release and upload asset file
       - name: Create release
-        uses: ncipollo/release-action@v1
+        uses: ncipollo/release-action@v2
         with:
           tag: ${{ github.event.inputs.release-version }}
           token: ${{ secrets.GITHUB_TOKEN }}
