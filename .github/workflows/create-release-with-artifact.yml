@@ -20,14 +20,26 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Create sample release file
-        id: sample
-        run: 
+      - name: Create sample release binary file
+        id: sample_binary
+        run: |
           file_name="example-output.dat"
-          
           dd if=/dev/zero of=$file_name bs=1M count=24
+          echo "name=$file_name" >> $GITHUB_OUTPUT
 
-          echo "::set-output name=file_name::$file_name"
+      - name: Download sample release picture file
+        id: sample_image
+        run: |
+          file_name="example-image.jpg"
+          wget -O $file_name https://images.unsplash.com/photo-1542553458-79a13aebfda6?ixlib=rb-4.0.3&dl=valentin-wallet-s1Iq2bRoR6Q-unsplash.jpg&q=80&fm=jpg&crop=entropy&cs=tinysrgb
+          echo "name=$file_name" >> $GITHUB_OUTPUT
+
+      - name: Create example text file
+        id: sample_text
+        run: |
+          file_name="example-text.txt"
+          dd if=/dev/urandom bs=786438 count=1 | base64 > $file_name
+          echo "name=$file_name" >> $GITHUB_OUTPUT
 
       # Create release and upload asset file
       - name: Create release
@@ -38,4 +50,4 @@ jobs:
           bodyFile: example/release-note.md
           prerelease: false
           owner: KevinRohn
-          artifacts: ${{ steps.sample.outputs.file_name }}
+          artifacts: "${{ steps.sample_binary.outputs.name }},${{ steps.sample_image.outputs.name }},${{ steps.sample_text.outputs.name }}"
