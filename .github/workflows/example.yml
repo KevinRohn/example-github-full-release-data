@@ -2,7 +2,11 @@ name: "Example of full release data"
 
 on:
   workflow_dispatch:
-
+    inputs:
+      use-version:
+        description: "Release version"
+        required: true
+        default: "v2"
 
 jobs:
   get-release-notes:
@@ -19,9 +23,10 @@ jobs:
       
       - name: Get "${{ github.repository }}" Release notes
         id: release_data
-        uses: KevinRohn/github-full-release-data@v2
-        with: 
-          body-markdown-file-path: ${{ steps.output_file.outputs.notes }}
+        uses: jenseng/dynamic-uses@v1
+        with:
+          uses: KevinRohn/github-full-release-data@${{ github.event.inputs.use-version }}
+          with: '{ "body-markdown-file-path" : ${{ steps.output_file.outputs.notes }} }'
 
       - name: Upload downloaded release-note as Workflow artifact
         uses: actions/upload-artifact@v4
