@@ -4,6 +4,9 @@
 > This is an release information markdown file.  
 > The file is used by the [create-release-with-artifact.yml](.github/workflows/create-release-with-artifact.yml) workflow.
 
+## What's Changed
+blah blah blah
+
 ## Release Information
 This is an demo release with some sample attachements to test the GitHub Action [github-full-release-data](https://github.com/marketplace/actions/github-release-data).
 
