@@ -15,7 +15,7 @@ jobs:
           output_file_name="release-note.md"
           touch $output_file_name
 
-          echo "::set-output name=notes::$output_file_name"
+          echo "notes=$output_file_name" >> $GITHUB_OUTPUT
       
       - name: Get "${{ github.repository }}" Release notes
         id: release_data
