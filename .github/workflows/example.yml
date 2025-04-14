@@ -24,7 +24,7 @@ jobs:
           body-markdown-file-path: ${{ steps.output_file.outputs.notes }}
 
       - name: Upload downloaded release-note as Workflow artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           path: ${{ steps.output_file.outputs.notes }}
 
