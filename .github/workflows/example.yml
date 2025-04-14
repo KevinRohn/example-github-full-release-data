@@ -9,11 +9,6 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-
-      # Cleanup workspace path
-      - name: Cleanup workspace path
-        uses: mickem/clean-after-action@v1
-
       - name: Create markdown output file
         id: output_file
         run: |
@@ -24,7 +19,7 @@ jobs:
       
       - name: Get "${{ github.repository }}" Release notes
         id: release_data
-        uses: KevinRohn/github-full-release-data@documentation
+        uses: KevinRohn/github-full-release-data@update
         with: 
           body-markdown-file-path: ${{ steps.output_file.outputs.notes }}
 
@@ -36,14 +31,10 @@ jobs:
   download-release-asset:
     runs-on: ubuntu-latest
   
-    steps:
-      # Cleanup workspace path
-      - name: Cleanup workspace path
-        uses: mickem/clean-after-action@v1
-    
+    steps:    
       - name: Download release asset from "${{ github.repository }}"
         id: release_data
-        uses: KevinRohn/github-full-release-data@documentation
+        uses: KevinRohn/github-full-release-data@update
         with: 
           asset-file: '*.dat'
           asset-output: './'
